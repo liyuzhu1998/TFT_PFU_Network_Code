@@ -5,6 +5,8 @@ This repository contains the code used to evaluate a 3D/2D DenseNet-style model 
 1. Run inference on example data with [test_detection_8frame.py](test_detection_8frame.py)
 2. Post-process the per-patch scores in MATLAB with [ResultsRead_TxT.m](ResultsRead_TxT.m)
 
+The Example Data can be found in: https://drive.google.com/drive/u/0/folders/19mrmmP8wwMerNz4dNcx9a4shqT66f4DN
+
 ## Repository Layout
 
 - [Dataset.py](Dataset.py) - dataset loader used by training
