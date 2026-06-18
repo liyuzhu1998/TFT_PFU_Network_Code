@@ -91,3 +91,4 @@ The test script expects a `diff_stack_multiparas` variable inside `diff_stack_mu
 - If you change the number of input channels, frames, or crop size, make sure the dataset loader, model initialization, and checkpoint all stay consistent.
 - The scripts currently assume a CUDA-capable environment when available and use `cuda:1` by default.
 - If you run into path issues on a different machine, search for `Y:/` and `./Example_Data/` in the scripts and update them to local paths.
+- Any questions? Welcome to contact liyuzhu@ucla.edu.
