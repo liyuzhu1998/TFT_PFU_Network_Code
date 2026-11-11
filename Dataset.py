@@ -44,18 +44,18 @@ class DataFolder(data.Dataset):
             print('Error loading file:', path)
         input_raw = input_raw['input'].astype('float32')
         if self.in_frames == 1:
-            input = input_raw[[2,3,4],s:self.in_frames+s,25:75,25:75].astype(float)
+            input = input_raw[[3,4],s:self.in_frames+s,25:75,25:75].astype(float)
         elif self.in_frames == 2:
-            input = input_raw[[2,3,4],4:8:3,25:75,25:75].astype(float)
+            input = input_raw[[3,4],4:8:3,25:75,25:75].astype(float)
             #input = input_raw[[4],4:8:3,25:75,25:75].astype(float) # 0: intensity 1: amplitude 2: phase 3: diff-1 4: diff-2
         elif self.in_frames == 8:
-            input = input_raw[[2,3,4],:,25:75,25:75].astype(float)
+            input = input_raw[[3,4],:,25:75,25:75].astype(float)
         label = self.label[index]
 
         input = np.nan_to_num(input)
         input[0,:,:,:] = (input[0,:,:,:] - np.mean(input[0,:,:,:])) / (np.std(input[0,:,:,:]) + 1e-8)
         input[1,:,:,:] = (input[1,:,:,:] - np.mean(input[1,:,:,:])) / (np.std(input[1,:,:,:]) + 1e-8)
-        input[2,:,:,:] = (input[2,:,:,:] - np.mean(input[2,:,:,:])) / (np.std(input[2,:,:,:]) + 1e-8)
+        # input[2,:,:,:] = (input[2,:,:,:] - np.mean(input[2,:,:,:])) / (np.std(input[2,:,:,:]) + 1e-8)
         # input = (input - np.min(input)) / (np.max(input) - np.min(input))
         # input = input * 2 - 1
         
