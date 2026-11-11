@@ -117,8 +117,8 @@ if __name__ == '__main__':
     # train_neg_round1_file = train_neg_round1_file[:int(len(train_neg_file)*0.65)]
     # train_neg_round2_file = train_neg_round2_file[:int(len(train_neg_file)*0.65)]
 
-    train_config = init_parameters(num_classes = 2, in_channel = 3, time_frame = 8) # change in_channel to 1,2,3
-    valid_config = init_parameters(num_classes = 2, in_channel = 3, time_frame = 8, is_training=False)
+    train_config = init_parameters(num_classes = 2, in_channel = 2, time_frame = 8) # change in_channel to 1,2,3
+    valid_config = init_parameters(num_classes = 2, in_channel = 2, time_frame = 8, is_training=False)
 
     train_pos_set = get_data_set(in_channels = train_config.in_channel, in_frames = train_config.time_frame, image_dir = train_pos_file, lab = 1, start_frame = 0, tf_crop = True)
     train_neg_set = get_data_set(in_channels = train_config.in_channel, in_frames = train_config.time_frame, image_dir = train_neg_file, lab = 0, start_frame = 0, tf_crop = True)
@@ -163,11 +163,11 @@ if __name__ == '__main__':
     model = network.DenseNet(in_channels = train_config.in_channel, in_frames = train_config.time_frame, init_channels = 32,growth_rate = 24 ,blocks = [3,3,6,3], num_classes=2, drop_rate=0.5, batch_norm = True)
     # model depth [3,4,6,3] [3,4,23,3] [3,8,36,3]
 
-    valid_log = 'Y:/TFT_based_PFU/TFT_PFU_Network_Code_Alp/log_20251121_8diffchannel_timeframe8_32_24_b3363_dr0.5_center50_newdataset_lucky4_channel2_3_4.txt'
+    valid_log = 'Y:/TFT_based_PFU/TFT_PFU_Network_Code_Alp/log_20251121_8diffchannel_timeframe8_32_24_b3363_dr0.5_center50_newdataset_lucky4_channel2.txt'
     #modelPath = 'Y:/TFT_based_PFU/TFT_PFU_Network_Code_Alp/model_20251121_8diffchannel_timeframe8_32_24_b3363_dr0.5_center50_newdataset_lucky4_channel2/model_detection_epoch163.pth'
     model.to(device)
     #model.load_state_dict(torch.load(modelPath))
-    model_save_path = 'Y:/TFT_based_PFU/TFT_PFU_Network_Code_Alp/model_20251121_8diffchannel_timeframe8_32_24_b3363_dr0.5_center50_newdataset_lucky4_channel2_3_4'
+    model_save_path = 'Y:/TFT_based_PFU/TFT_PFU_Network_Code_Alp/model_20251121_8diffchannel_timeframe8_32_24_b3363_dr0.5_center50_newdataset_lucky4_channel2'
     if os.path.exists(model_save_path)==False:
         os.mkdir(model_save_path)
 
@@ -211,7 +211,6 @@ if __name__ == '__main__':
             output = model(input)
             model_ce_loss = ce_loss(output, label)
             train_ce_loss += model_ce_loss.item()
-            clip_grad_norm_(model.parameters(),0.5)
             model_ce_loss.backward()
             optimizer.step()
             _,predicted = torch.max(output,1)
